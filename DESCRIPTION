@@ -1,8 +1,16 @@
 Package: advertools
-Title: What the Package Does (one line, title case)
+Title: Productivity & analysis tools for online marketing
 Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
-Depends: R (>= 3.2.4)
-License: What license is it under?
+Authors@R: person("Elias", "Dabbas", email = "elias@media-supermarket.com", role = c("aut", "cre"))
+Description: Tools that make the life of online marketers a little easier by
+    providing a set of functions that help in keyword generation, keyword and text
+    analysis, tracking competition, and more.
+Depends:
+    R (>= 3.2.4)
+Imports:
+    dplyr,
+    tidyr,
+    stringr
+License: MIT
 LazyData: true
+RoxygenNote: 5.0.1
