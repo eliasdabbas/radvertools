@@ -1,2 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^\.httr-oauth$
+^packrat/
+^\.Rprofile$

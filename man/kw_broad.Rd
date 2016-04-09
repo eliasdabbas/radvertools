@@ -6,21 +6,28 @@
 \usage{
 kw_broad(x)
 }
+\arguments{
+\item{x}{a keyword or a vector of keywords}
+}
+\value{
+keywords without ", [, ], +, or -
+}
 \description{
-This is useful in case you already have a keyword(s) as phrase, or exact for
+This is useful in case you already have keywords as phrase, or exact for
 example and want to return to broad. Another useful thing about this function is
 that it serves as an intermediary state between transforming a keyword from phrase to exact
 for example, it makes sure that you don't end up with something like ["keyword"].
 }
-\section{Examples}{
-
-
-\code{iris$exact <- kw_exact(iris$Species)}
-
-\code{iris$broad <- kw_broad(iris$exact)}
-
-\code{mtcars$phrase <- kw_phrase(rownames(mtcars))}
-
-\code{mtcars$broad <- kw_broad(mtcars$phrase)}
+\examples{
+iris$exact <- kw_exact(iris$Species)
+iris$broad <- kw_broad(iris$exact)
+mtcars$phrase <- kw_phrase(rownames(mtcars))
+mtcars$broad <- kw_broad(mtcars$phrase)
 }
+\keyword{AdWords,}
+\keyword{Ads,}
+\keyword{Bing}
+\keyword{SEM,}
+\keyword{marketing}
+\keyword{online}
 
