@@ -1,4 +1,4 @@
-#' Words in text
+#' Word frequency
 #'
 #' Analyze the weighted frequency of words in a certain text with metrics.
 #' Get hidden patterns in the text by extracting and aggregating metrics about words
@@ -18,7 +18,7 @@
 #'
 #' @examples
 #'
-words_in_text <- function(df){
+word_frequency <- function(df){
 
   names(df) <- c("text", "metric")
   df$metric <- tidyr::extract_numeric(df$metric)
