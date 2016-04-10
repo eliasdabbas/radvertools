@@ -131,7 +131,7 @@ kw_negative_exact <- function(x){
 #' kw_modified_broad(keywords)
 #' @family keyword functions
 kw_modified_broad <- function(x){
-  if (grep(" ", x = x) > 0){
+    if (length(grep(" ", x = x)) > 0){
     x <-  gsub(pattern = " ", replacement = " +", x = kw_broad(x))
     x <- paste0("+", x)
     x
