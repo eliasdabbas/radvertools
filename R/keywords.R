@@ -9,6 +9,7 @@
 #'
 #' @return keywords without ", [, ], +, or -
 #' @export
+#' @importFrom magrittr %>%
 #' @keywords AdWords, Bing Ads, SEM, online marketing
 #' @examples
 #' iris$exact <- kw_exact(iris$Species)
@@ -16,7 +17,7 @@
 #' mtcars$phrase <- kw_phrase(rownames(mtcars))
 #' mtcars$broad <- kw_broad(mtcars$phrase)
 kw_broad <- function(x){
-  modifiers <- paste('"', "\\[", "\\]", "\\+", "\\-", sep  = "|")
+  modifiers <- paste('"', "\\[", "\\]", "\\+", "\\-", "'", sep  = "|")
   gsub(pattern = modifiers, replacement = "", x = x)
 }
 

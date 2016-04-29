@@ -13,6 +13,7 @@
 #' @export
 #'
 #' @examples
+#' kw_combinations(mtcars, c("cyl", "mpg"))
 kw_combinations <- function(df, cols, sep = " ") {
   if (!all(cols %in% names(df))){
     stop("make sure you select columns from the data frame")

@@ -17,31 +17,64 @@
 #' @export
 #'
 #' @examples
-#'
+#' word_frequency(boxoffice)
 word_frequency <- function(df){
 
   names(df) <- c("text", "metric")
   df$metric <- tidyr::extract_numeric(df$metric)
-  df <- df %>% dplyr::arrange(desc(metric))
+  df <- df[order(df$metric,decreasing = T), ]
+  originaldf <- df
+  df$length <-   stringr::str_count(string = df$text, pattern = ' ') + 1
+  df <- df %>%
+    tidyr::separate(col = text, into = 1:max(df$length), sep = ' ', remove = FALSE)
 
-  dfsep <- df
-  dfsep$length <-   stringr::str_count(string = dfsep$text, pattern = ' ') + 1
+  df <- df %>% tidyr::gather(order, word, -c(text, length, metric))
+  df <- df %>% dplyr::filter(!is.na(word))
+  df <- df %>% dplyr::group_by(word) %>%
+    dplyr::summarise(abs_freq = n(),   wtd_freq = sum(metric, na.rm = TRUE)) %>%
+    dplyr::arrange(desc(wtd_freq))
 
-  dfsep <- dfsep %>%
-    tidyr::separate(col = text, into = 1:max(dfsep$length), sep = ' ', remove = FALSE)
+  df$cum_perc <- round(cumsum(df$wtd_freq / sum(df$wtd_freq)), digits = 2)
+  df$perc <- round(df$wtd_freq / sum(df$wtd_freq), digits = 3)
+  df$text <- originaldf$text[1:nrow(df)]
+  df$original_metric <- originaldf$metric[1:nrow(df)]
 
-  dfmelt <- dfsep %>% tidyr::gather(order, word, -c(text, length, metric))
-  dfmelt <- dfmelt %>% dplyr::filter(!is.na(word))
-
-  dffinal <- dfmelt %>% dplyr::group_by(word) %>%
-    dplyr::summarise(metric = sum(metric, na.rm = TRUE)) %>%
-    dplyr::arrange(desc(metric))
-
-  dffinal$cum_perc <- round(cumsum(dffinal$metric / sum(dffinal$metric)), digits = 2)
-  dffinal$perc <- round(dffinal$metric / sum(dffinal$metric), digits = 3)
-  dffinal$keyword <- df$text[1:nrow(dffinal)]
-  dffinal$original_metric <- df$metric[1:nrow(dffinal)]
-  dffinal$wordle <- paste(dffinal$word, dffinal$metric, sep = ':')
-  assign("textdf", dffinal, envir = globalenv())
-  View(dffinal)
+  assign("textdf", df, envir = globalenv())
+  View(df)
 }
+
+#' The boxoffice revenues of the top 100 movies of all time
+#'
+#' A dataset of the top 100 grossing movies of all time, as of April
+#' 2016.
+#'
+#' @format A data frame with 101 rows and 2 variables:
+#' \describe{
+#'    \item{Movie_Title}{Name of the movie}
+#'    \item{Lifetime.Gross}{Lifetime revnue in US$}
+#' }
+#' @source \url{http://www.boxofficemojo.com/alltime/domestic.htm}
+"boxoffice"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
