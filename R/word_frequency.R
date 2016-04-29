@@ -30,7 +30,7 @@ word_frequency <- function(df){
 
   df <- df %>% tidyr::gather(order, word, -c(text, length, metric))
   df <- df %>% dplyr::filter(!is.na(word))
-  df <- df %>% dplyr::group_by(word) %>%
+  df <- df %>% dplyr::group_by(tolower(word)) %>%
     dplyr::summarise(abs_freq = n(),   wtd_freq = sum(metric, na.rm = TRUE)) %>%
     dplyr::arrange(desc(wtd_freq))
 
