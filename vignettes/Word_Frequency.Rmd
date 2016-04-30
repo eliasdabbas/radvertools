@@ -1,0 +1,158 @@
+---
+title: "Word Frequency"
+author: "Elias Dabbas"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Word Frequency}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+
+---
+
+### A function to extract hidden insights from a long tail of unstructured text
+
+#####            advertools::word_frequency()
+
+Knowing the frequency of word usage can uncover lots of hidden insights in the long tail of very little used keywords. This is not only for keywords, but can be extremely useful in several other cases: 
+
+- keywords (what you target for your ads)
+- search terms (what people actually search for)
+- URLs that contain page titles
+- article / story / video titles
+- books, movies, songs titles
+
+The first thing is to measure the straightforward frequency of words that occur in the text that we have.
+
+```{r}
+df <- data.frame(text = c("first word", "second word", "third word"), metric = 1)
+df
+```
+
+Metric here was set to 1 because we are not taking any weights, and simply counting the occurence of each word. 
+
+```{r}
+library(tidyr)
+df <- df %>% separate(col = text, into = 1:2, sep = " ", remove = F)
+df
+
+```
+Now we have the original text, as well as each word separated into separate columns. Not it is easier to count the occurence of each word. 
+
+```{r}
+df <- df %>% gather(order, word, -c(text, metric))
+df
+```
+Now, using `dplyr` we can easily `group_by()` word, and `summarise` by the sum of metric.
+```{r message=FALSE}
+library(dplyr)
+df <- df %>% 
+  group_by(word) %>% 
+  summarise(metric = sum(metric, na.rm = T)) %>% 
+  arrange(desc(metric))
+
+df
+```
+Now we can see that the word "word" was the most used in the data frame. 
+
+Now, to the more interesting case, which is having different metrics (weights) for each of the words that we have. This is where more insights, and hidden information can be uncovered. 
+
+```{r}
+df2 <- data.frame(
+  text = c("book name", "book title", "great title", "great name"), 
+  metric = c(100, 120, 300, 150))
+df2
+```
+running the same previous code in one chunk: 
+```{r}
+df2 <- df2 %>% separate(col = text, into = 1:2, sep = " ", remove = F) %>% 
+  gather(order, word, -c(text, metric)) %>% 
+  group_by(word) %>% 
+  summarise(metric = sum(metric, na.rm = T)) %>% 
+  arrange(desc(metric))
+df2
+```
+Here each of the words "book", "name", "title", and "great", were used twice each, but the highest from a weighted perspective was "great". 
+The metric here could be any metric of choice; book sales, keyword impressions, movie sales, etc. 
+
+The function `word_frequency()` does all this automatically in one step, and in addition compares the original metric to the weighted one, and shows some additional stats. 
+
+We can demonstrate this with the top ten movies by gross sales. In this case we want to see which words appear the most, takingn into consideration the sales (weight), and not only the absolute frequencies.
+
+
+|text                                      | metric   |  
+|------------------------------------------|----------| 
+|Star Wars The Force Awakens               |935254389 | 
+|Avatar                                    |760507625 | 
+|Titanic                                   |658672302 | 
+|Jurassic World                            |652270625 | 
+|Marvels The Avengers                      |623357910 | 
+|The Dark Knight                           |534858444 | 
+|Star Wars Episode I - The Phantom Menace  |474544677 |  
+|Star Wars                                 |460998007 | 
+|Avengers Age of Ultron                    |459005868 | 
+|The Dark Knight Rises                     |448139099 | 
+
+*source: boxofficemojo.com 
+
+```{r message=FALSE, warning=FALSE, fig.width=10}
+
+movies <- data.frame(
+  text = c("Star Wars The Force Awakens", "Avatar", "Titanic", "Jurassic World", "Marvels The Avengers", "The Dark Knight", "Star Wars Episode I - The Phantom Menace", "Star Wars", "Avengers Age of Ultron", "The Dark Knight Rises"),
+  metric = c(935254389, 760507625, 658672302, 652270625, 623357910, 534858444, 474544677, 460998007, 459005868, 448139099)
+)
+movies
+library(advertools)
+word_frequency(movies)
+data.frame(textdf)
+
+```
+
+### word: 
+This column shows the top used words, sorted by descending order of the weight metric (whatever the metric is).
+In this particular case, The word "the" appears in movies that generated a total of $3,016,154,519.
+
+### abs_freq: 
+The absolute frequency of this word. 
+
+### wtd_freq: 
+Weighted frequency. 
+
+### cum_perc: 
+Cumulative percentage (based on the weighted frequency). 6 words appear in movies that generated 51% of the total revenues. 
+
+### perc: 
+Percentage for each word.
+
+### text: 
+This is the original text, which is the movie title in this case.    
+
+### original_metric: 
+In this case the gross revenue.
+
+Although Avatar is the second movie, the word 'avatar' is at number 9 when we take into consideration all the words in the list and take the weights of each. Titanic is also interesting, in that it is at number 3 in the original list, but at number 10 when we take the weights. 
+
+This is only for ten movies, and things get much more interesting if we take a larger list of, say 10k movies. Then we are dealing with a much longer tail of words, and some differences are very interesting to observe. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

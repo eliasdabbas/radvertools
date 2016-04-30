@@ -1,0 +1,40 @@
+---
+title: "Search Ads Aggregation"
+author: "Elias Dabbas"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Search Ads Aggregation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+### Search Ads Aggregation
+
+The second family of functions help you get an overview of who's bidding on which keywords for a search engine / domain combination. 
+
+```{r message=FALSE, warning=FALSE}
+library(advertools)
+library(dplyr)
+library(tidyr)
+search_ads_google(keywords = c("flight reservations", "hotel #booking"), domains = c("com", "co.uk"))
+
+head(google_adsDF)
+
+```
+We can observer several things here: 
+
+#### Analysis by keyword
+We can filter by each keyword and see how competitive it is (number of ads vs other keywords), as well as what competitors are saying and claiming for this keyword. This is important if you want to know how to position yourself properly, or if you want to develop an understanding of the market around this keyword
+
+#### Analysis by advertiser
+Filtering by advertiser can show us whether or not they are being relevant, or are they just randomly matching their ads to any set of related topics / keywords. The frequency of advertisers on several keywords also show how aggressive they are compared to their competitors.
+
+#### Domain 
+This shows the differences between the domains. This does not show exactly what is being shown in the different countries, because the targeting and triggering ads is not that exact. It does give a good idea about how those advertisers are targeting and how much coverage they have. 
+
+#### Position
+Clear metric showing the position of each advertiser. Taken as an average per advertiser, it's a good indicator of how aggressive they are in their targeting. 
+
+#### Time / date
+Only useful if you rerun the same query several times in several days, and at different times. It can reveal some insights on what is happening at different times of the day, and different days of the week. 

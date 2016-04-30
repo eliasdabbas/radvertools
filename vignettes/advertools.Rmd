@@ -1,0 +1,40 @@
+---
+title: "advertools"
+author: "Elias Dabbas"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{advertools}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Analysis and productivity tools for online marketing  
+
+This package provides a set of tools that help in various online marketing tasks. It's under heavy development and so far it provides three main functions / families of functions: 
+
+- [kw_match_type()](keyword_matchtype.html)
+- [search_ads_search_engine()](search_ads_aggregation.html)
+- [word_frequency()](Word_Frequency.html)
+
+
+There is nothing sophisticated about these functions. They just save you some typing time, make sure you don't introduce any typos. 
+Ideally, the proper way to do this with big campaigns is to use specieal software like AdWords Editor, but with very big campaigns, it gets really slow and might take hours. In this case I prefer using the web interface, which allows uploading of csv files, and in these files, the keyword match type needs to specified as shown above. 
+
+
+### Search Ads Aggregation
+
+The second family of functions help you get an overview of who's bidding on which keywords for a search engine / domain combination. 
+
+
+
+### Word Frequency 
+
+Knowing the frequency of word usage can uncover lots of hidden insights in the long tail of very little used keywords. This is not only for keywords, but can be extremely useful in several other cases: 
+
+- keywords (what you target for your ads)
+- search terms (what people actually search for)
+- URLs that contain page titles
+- article / story / video titles
+- sales figures for books, movies, songs
+

@@ -1,0 +1,47 @@
+---
+title: "Keyword Match Type"
+author: "Elias Dabbas"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Keyword Match Type}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Efficiently manage the different keyword match types in R with advertools  
+
+
+### Keyword Match Types
+
+When working with keywords, you don't only include the keywords as they are, you need to specify the match type of the keyword. The way to do this is to simply wrap the text with one of the specified punctuation marks to indicate which match type you want to use: 
+
+- **Broad Match** no punctuation, and your ads will be triggered by similar keywords, synonyms, or the words in a different order. 
+- **+Modified +Broad +Match** a plus sign next to any word that you want to trigger close variations to it. Plurals, singulars, and derivatives are included but not synonyms. 
+
+- **"Phrase Match"** quotation marks, indicate that you want your ads to be triggered by the exact string of characters within the quotation marks, with anything before or after them. 
+- **[Exact Match]** sqare brackets mean that you want ads to be triggered by the exact same character string within the brackets, nothing before and nothing after. In AdWords though, there is an option where you allow close variations, which means plurals, and some typos. In general though you are targeting with close to 100% precision with exact match. 
+ - **-negative match** a minus sign before the keyword excludes any keywords that include it from triggering your ads. This is extremely helpful to control what is shown when you are using anything other than phrase match, as things can get out of control without negative match. 
+
+Negative match can also be combined with phrase and exact, for more refined control. 
+
+All the keyword match type functions start with `kw_` and then you specify the match type. 
+
+There is nothing sophisticated about these functions. They just save you some typing time, make sure you don't introduce any typos. 
+Ideally, the proper way to do this with big campaigns is to use specieal software like AdWords Editor, but with very big campaigns, it gets really slow and might take hours. In this case I prefer using the web interface, which allows uploading of csv files, and in these files, the keyword match type needs to specified as shown above. 
+
+```{r}
+library(advertools)
+carnames <- data.frame(broad = rownames(mtcars))
+carnames$modifed <- kw_modified_broad(carnames$broad) 
+carnames$phrase <- kw_phrase(carnames$broad)
+carnames$exact <- kw_exact(carnames$phrase)
+carnames$negative <- kw_negative(carnames$exact)
+carnames[1:10, ]
+```
+
+Notice that on the fourth and fifth commands I am calling the function on different match types. This is to show that all the functions first remove any previous punctuation and then add the new ones. 
+
+If you had and exact match [keyword] and then changed your mind to make it phrase, and then negative, you will end up with something like -"[keyword]" which doesn't make sense. So this is an efficiency advantage of using these functions.  
+
+
