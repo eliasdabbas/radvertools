@@ -26,6 +26,6 @@ useful for:
 - any other social media text with metrics
 }
 \examples{
-
+word_frequency(boxoffice)
 }
 

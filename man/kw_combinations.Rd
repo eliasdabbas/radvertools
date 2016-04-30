@@ -22,4 +22,7 @@ This function helps you generate combinations and sequences of words, to
 obtain meaningful keywords for your campaigns. It assumes you already have a
 data frame with different words for each element of search
 }
+\examples{
+kw_combinations(mtcars, c("cyl", "mpg"))
+}
 
