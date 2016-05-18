@@ -1,13 +1,11 @@
-Untitled
-================
-
 advertools
-==========
+================
 
 This package provides a set of tools that help in various online marketing tasks. It's under heavy development and so far it provides three main functions / families of functions:
 
 -   word\_frequency()
 -   kw\_match\_type()
+-   kw\_combinations()
 -   search\_ads\_search\_engine()
 
 Installation

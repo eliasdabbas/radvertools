@@ -1,5 +1,5 @@
 ---
-title: "Untitled"
+title: "advertools"
 output: github_document
 ---
 
@@ -7,13 +7,12 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# advertools
-
 
 This package provides a set of tools that help in various online marketing tasks. It's under heavy development and so far it provides three main functions / families of functions: 
 
 - word_frequency()
 - kw_match_type()
+- kw_combinations()
 - search_ads_search_engine()
 
 
