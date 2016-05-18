@@ -95,7 +95,7 @@ We can demonstrate this with the top ten movies by gross sales. In this case we 
 
 *source: boxofficemojo.com 
 
-```{r message=FALSE, warning=FALSE, fig.width=10}
+```{r message=FALSE, warning=FALSE}
 
 movies <- data.frame(
   text = c("Star Wars The Force Awakens", "Avatar", "Titanic", "Jurassic World", "Marvels The Avengers", "The Dark Knight", "Star Wars Episode I - The Phantom Menace", "Star Wars", "Avengers Age of Ultron", "The Dark Knight Rises"),

@@ -36,5 +36,4 @@ This shows the differences between the domains. This does not show exactly what 
 #### Position
 Clear metric showing the position of each advertiser. Taken as an average per advertiser, it's a good indicator of how aggressive they are in their targeting. 
 
-#### Time / date
-Only useful if you rerun the same query several times in several days, and at different times. It can reveal some insights on what is happening at different times of the day, and different days of the week. 
+
