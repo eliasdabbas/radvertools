@@ -3,10 +3,12 @@ advertools
 
 This package provides a set of tools that help in various online marketing tasks. It's under heavy development and so far it provides three main functions / families of functions:
 
--   word\_frequency()
--   kw\_match\_type()
--   kw\_combinations()
--   search\_ads\_search\_engine()
+``` r
+- word_frequency()
+- kw_match_type()
+- kw_combinations()
+- search_ads_search_engine()
+```
 
 Installation
 ------------
@@ -22,8 +24,6 @@ word\_frequency()
 -----------------
 
 ### A function to extract hidden insights from a long tail of unstructured text
-
-##### advertools::word\_frequency()
 
 Knowing the frequency of word usage can uncover lots of hidden insights in the long tail of very little used keywords. This is not only for keywords, but can be extremely useful in several other cases:
 
