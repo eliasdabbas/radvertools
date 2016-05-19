@@ -8,13 +8,22 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-This package provides a set of tools that help in various online marketing tasks. It's under heavy development and so far it provides three main functions / families of functions: 
+This package provides a set of tools that help in various online marketing tasks. It provides
+the following functions / families of functions: 
 ```{r eval=FALSE}
 - word_frequency()
 - kw_match_type()
 - kw_combinations()
 - search_ads_search_engine()
 ```
+
+It is useful if you use any of the following: 
+
+- Google AdWords
+- Bing Search Ads
+- Yahoo Search Advertising
+- Yandex Search Advertising
+- Twitter Ads
 
 
 ## Installation
@@ -26,7 +35,7 @@ install.packages("devtools")
 devtools::install_github("eliasdabbas/advertools")
 ```
 ## word_frequency()
-### A function to extract hidden insights from a long tail of unstructured text
+### Extract hidden insights from a long tail of unstructured text
 
 
 Knowing the frequency of word usage can uncover lots of hidden insights in the long tail of very little used keywords. This is not only for keywords, but can be extremely useful in several other cases: 
@@ -52,13 +61,13 @@ df <- df %>% separate(col = text, into = 1:2, sep = " ", remove = F)
 df
 
 ```
-Now we have the original text, as well as each word separated into separate columns. Not it is easier to count the occurence of each word. 
+Now we have the original text, as well as each word separated into separate columns. Now it is easier to count the occurence of each word. 
 
 ```{r}
 df <- df %>% gather(order, word, -c(text, metric))
 df
 ```
-Now, using `dplyr` we can easily `group_by()` word, and `summarise` by the sum of metric.
+Now, using `dplyr` we can easily `group_by()` word, and `summarise()` by the sum of `metric`.
 ```{r message=FALSE}
 library(dplyr)
 df <- df %>% 
@@ -70,7 +79,7 @@ df
 ```
 Now we can see that the word "word" was the most used in the data frame. 
 
-Now, to the more interesting case, which is having different metrics (weights) for each of the words that we have. This is where more insights, and hidden information can be uncovered. 
+Now, to the more interesting case, which is having a metric (weight) for the words that we have. This is where more insights, and hidden information can be uncovered. 
 
 ```{r}
 df2 <- data.frame(

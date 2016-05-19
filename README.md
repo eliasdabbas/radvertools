@@ -1,7 +1,7 @@
 advertools
 ================
 
-This package provides a set of tools that help in various online marketing tasks. It's under heavy development and so far it provides three main functions / families of functions:
+This package provides a set of tools that help in various online marketing tasks. It provides the following functions / families of functions:
 
 ``` r
 - word_frequency()
@@ -58,7 +58,7 @@ df
     ## 2 second word second word      1
     ## 3  third word  third word      1
 
-Now we have the original text, as well as each word separated into separate columns. Not it is easier to count the occurence of each word.
+Now we have the original text, as well as each word separated into separate columns. Now it is easier to count the occurence of each word.
 
 ``` r
 df <- df %>% gather(order, word, -c(text, metric))
@@ -73,7 +73,7 @@ df
     ## 5 second word      1     2   word
     ## 6  third word      1     2   word
 
-Now, using `dplyr` we can easily `group_by()` word, and `summarise` by the sum of metric.
+Now, using `dplyr` we can easily `group_by()` word, and `summarise()` by the sum of `metric`.
 
 ``` r
 library(dplyr)
@@ -96,7 +96,7 @@ df
 
 Now we can see that the word "word" was the most used in the data frame.
 
-Now, to the more interesting case, which is having different metrics (weights) for each of the words that we have. This is where more insights, and hidden information can be uncovered.
+Now, to the more interesting case, which is having a metric (weight) for the words that we have. This is where more insights, and hidden information can be uncovered.
 
 ``` r
 df2 <- data.frame(
