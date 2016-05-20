@@ -10,6 +10,14 @@ This package provides a set of tools that help in various online marketing tasks
 - search_ads_search_engine()
 ```
 
+It is useful if you use any of the following:
+
+-   Google AdWords
+-   Bing Search Ads
+-   Yahoo Search Advertising
+-   Yandex Search Advertising
+-   Twitter Ads
+
 Installation
 ------------
 
@@ -23,7 +31,7 @@ devtools::install_github("eliasdabbas/advertools")
 word\_frequency()
 -----------------
 
-### A function to extract hidden insights from a long tail of unstructured text
+### Extract hidden insights from a long tail of unstructured text
 
 Knowing the frequency of word usage can uncover lots of hidden insights in the long tail of very little used keywords. This is not only for keywords, but can be extremely useful in several other cases:
 
