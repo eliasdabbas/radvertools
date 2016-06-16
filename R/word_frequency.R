@@ -55,26 +55,3 @@ word_frequency <- function(df, sep = " "){
 #' }
 #' @source \url{http://www.boxofficemojo.com/alltime/domestic.htm}
 "boxoffice"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
