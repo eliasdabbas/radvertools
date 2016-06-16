@@ -40,9 +40,7 @@ word_frequency <- function(df, sep = " "){
   df$perc <- round(df$wtd_freq / sum(df$wtd_freq), digits = 3)
   df$text <- originaldf$text[1:nrow(df)]
   df$original_metric <- originaldf$metric[1:nrow(df)]
-
-  assign("textdf", df, envir = globalenv())
-  View(df)
+  df
 }
 
 #' The boxoffice revenues of the top 100 movies of all time
