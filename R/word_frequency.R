@@ -27,7 +27,7 @@ word_frequency <- function(df, sep = " "){
   df <- df %>% dplyr::filter(!is.na(text))
   df$length <-   stringr::str_count(string = df$text, pattern = ' ') + 1
   df <- df %>%
-    tidyr::separate(col = text, into = 1:max(df$length), sep = sep, remove = FALSE)
+    tidyr::separate(col = text, into = as.character(1:max(df$length)), sep = sep, remove = FALSE)
 
   df <- df %>% tidyr::gather(order, word, -c(text, length, metric))
   df <- df %>% dplyr::filter(!is.na(word))
