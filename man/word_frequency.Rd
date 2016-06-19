@@ -4,7 +4,7 @@
 \alias{word_frequency}
 \title{Word frequency}
 \usage{
-word_frequency(df)
+word_frequency(df, sep = " ")
 }
 \arguments{
 \item{df}{a data frame with a character and a numeric vector columns}

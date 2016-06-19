@@ -1,3 +1,6 @@
+#' twtr_get_hashtags
+#'
+#' Extract hash tags and analyze them
 twtr_get_hashtags <- function(x) {
   hash_idx <- stringr::str_detect(x, "#\\w+")
   hash_perc <- mean(hash_idx)
@@ -17,6 +20,9 @@ twtr_get_hashtags <- function(x) {
        top_hashtags = top_hashtags)
 }
 
+#' twtr_get_mentions
+#'
+#' Extract mentions and analyze them
 twtr_get_mentions <- function(x) {
   mention_idx <- stringr::str_detect(x, "(^@\\w+| @\\w+)")
   mention_perc <- mean(mention_idx)
