@@ -1,6 +1,12 @@
 #' twtr_get_hashtags
 #'
 #' Extract hash tags and analyze them
+#'
+#' @param \code{x} a vector of tweets
+#'
+#' @export
+#'
+#' @return a list of data frames about the hash tags
 twtr_get_hashtags <- function(x) {
   hash_idx <- stringr::str_detect(x, "#\\w+")
   hash_perc <- mean(hash_idx)
@@ -24,6 +30,11 @@ twtr_get_hashtags <- function(x) {
 #' twtr_get_mentions
 #'
 #' Extract mentions and analyze them
+#'
+#' @param \code{x} a vector of tweets
+#'
+#' @export
+#' @return a list of data frames about the mentions
 twtr_get_mentions <- function(x) {
   mention_idx <- stringr::str_detect(x, "(^@\\w+| @\\w+)")
   mention_perc <- mean(mention_idx)
