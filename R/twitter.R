@@ -8,6 +8,7 @@ twtr_get_hashtags <- function(x) {
   hash_count <- stringr::str_count(x, "#\\w+")
   hash_count <- data.frame(hash_count = hash_count)
   hash_table <- table(hash_count) %>% as.data.frame()
+  hash_table$perc <- hash_table$Freq / sum(hash_table$Freq, na.rm = TRUE)
   hashtags <- stringr::str_extract_all(x, "#\\w+", TRUE)
   colnames(hashtags) <- paste0("hash_", 1:ncol(hashtags))
   top_hashtags <- sort(table(hashtags), decreasing = T) %>%
@@ -30,6 +31,7 @@ twtr_get_mentions <- function(x) {
   mention_count <- stringr::str_count(x, "(^@\\w+| @\\w+)")
   mention_count <- data.frame(mention_count = mention_count)
   mention_table <- table(mention_count) %>% as.data.frame()
+  mention_table$perc <- mention_table$Freq / sum(mention_table$Freq, na.rm = TRUE)
   mentions <- stringr::str_extract_all(x, "(^@\\w+| @\\w+)", TRUE)
   colnames(mentions) <- paste0("mention_", 1:ncol(mentions))
   top_mentions <- sort(table(mentions), decreasing = T) %>%

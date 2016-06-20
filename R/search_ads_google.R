@@ -60,7 +60,5 @@ search_ads_google <- function(keywords, domains = "com"){
   google_adsDF$rank <- NULL
   google_adsDF$time <- Sys.time()
   google_adsDF$dispurl <-  gsub(pattern = "^www\\.", replacement = "", x = google_adsDF$dispurl)
-  assign(x = "google_adsDF", value = google_adsDF, envir = globalenv())
-
-  View(google_adsDF)
+  google_adsDF
 }
