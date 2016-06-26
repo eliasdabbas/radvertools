@@ -8,25 +8,21 @@
 #'
 #' @return a list of data frames about the hash tags
 twtr_get_hashtags <- function(x) {
-  hash_idx <- stringr::str_detect(x, "#\\w+")
-  hash_perc <- mean(hash_idx)
-  hash_perc <- data.frame(hash_perc = hash_perc)
-  hash_count <- stringr::str_count(x, "#\\w+")
-  hash_count <- data.frame(hash_count = hash_count)
-  hash_table <- table(hash_count) %>% as.data.frame()
-  hash_table$perc <- hash_table$Freq / sum(hash_table$Freq, na.rm = TRUE)
-  hashtags <- stringr::str_extract_all(x, "#\\w+", TRUE)
+  hashtags        <- tolower(stringr::str_extract_all(x, "(^#\\w+| #\\w+)", TRUE))
   colnames(hashtags) <- paste0("hash_", 1:ncol(hashtags))
-  top_hashtags <- sort(table(hashtags), decreasing = T) %>%
-    as.data.frame()
-  top_hashtags <- top_hashtags[-1, ]
-  top_hashtags$percentage <- top_hashtags$Freq / length(x)
-
-  list(hash_perc = hash_perc, hash_count = hash_count,
-       hash_table = hash_table, hashtags = hashtags,
-       top_hashtags = top_hashtags)
+  top_hashtags   <- as.data.frame(sort(table(hashtags), decreasing = TRUE),
+                                  stringsAsFactors = F)
+  top_hashtags   <- subset(top_hashtags, hashtags != "")
+  hash_count      <- data.frame(hash_count = stringr::str_count(x, "(^#\\w+| #\\w+)"))
+  hash_freq      <- as.data.frame(table(hash_count))
+  hashtag_summary <- data.frame(tweets = length(x),
+                                hashtag_count = sum(hash_count$hash_count),
+                                unique_hashtags = nrow(top_hashtags),
+                                hash_per_tweet = round(sum(hash_count$hash_count) / length(x), digits = 2))
+  list(hashtags = hashtags, top_hashtags = top_hashtags,
+       hash_count = hash_count, hash_freq = hash_freq,
+       hashtag_summary = hashtag_summary)
 }
-
 #' twtr_get_mentions
 #'
 #' Extract mentions and analyze them
@@ -36,20 +32,43 @@ twtr_get_hashtags <- function(x) {
 #' @export
 #' @return a list of data frames about the mentions
 twtr_get_mentions <- function(x) {
-  mention_idx <- stringr::str_detect(x, "(^@\\w+| @\\w+)")
-  mention_perc <- mean(mention_idx)
-  mention_perc <- data.frame(mention_perc = mention_perc)
-  mention_count <- stringr::str_count(x, "(^@\\w+| @\\w+)")
-  mention_count <- data.frame(mention_count = mention_count)
-  mention_table <- table(mention_count) %>% as.data.frame()
-  mention_table$perc <- mention_table$Freq / sum(mention_table$Freq, na.rm = TRUE)
-  mentions <- stringr::str_extract_all(x, "(^@\\w+| @\\w+)", TRUE)
+  mentions        <- tolower(stringr::str_extract_all(x, "(^@\\w+| @\\w+|^\\.@\\w+)", TRUE))
   colnames(mentions) <- paste0("mention_", 1:ncol(mentions))
-  top_mentions <- sort(table(mentions), decreasing = T) %>%
-    as.data.frame()
-  top_mentions <- top_mentions[-1, ]
-  top_mentions$percentage <- top_mentions$Freq / length(x)
-  list(mention_perc = mention_perc, mention_count = mention_count,
-       mention_table = mention_table, mentions = mentions,
-       top_mentions = top_mentions)
+  top_mentions   <- as.data.frame(sort(table(mentions), decreasing = TRUE),
+                                  stringsAsFactors = F)
+  top_mentions   <- subset(top_mentions, mentions != "")
+  mention_count      <- data.frame(mention_count = stringr::str_count(x, "(^@\\w+| @\\w+|^\\.@\\w+)"))
+  mention_freq      <- as.data.frame(table(mention_count))
+  mention_summary <- data.frame(tweets = length(x),
+                                mention_count = sum(mention_count$mention_count),
+                                unique_mentions = nrow(top_mentions),
+                                mention_per_tweet = round(sum(mention_count$mention_count) / length(x), digits = 2))
+  list(mentions = mentions, top_mentions = top_mentions,
+       mention_count = mention_count, mention_freq = mention_freq,
+       mention_summary = mention_summary)
 }
+twtr_get_word <- function(x, word = "word", exact = TRUE) {
+  x <- tolower(x)
+  word <- tolower(word)
+
+  if (exact) {
+    wordregex <- paste0("(^", word, " | ", word, " | ", word, "$)")
+  }else {
+    wordregex <- word
+  }
+  words        <- stringr::str_extract_all(x, wordregex, TRUE)
+  colnames(words) <- paste0("word_", 1:ncol(words))
+  top_words   <- as.data.frame(sort(table(words), decreasing = TRUE),
+                               stringsAsFactors = F)
+  top_words   <- subset(top_words, words != "")
+  word_count      <- data.frame(word_count = stringr::str_count(x, wordregex))
+  word_freq      <- as.data.frame(table(word_count))
+  word_summary <- data.frame(tweets = length(x),
+                             word_count = sum(word_count$word_count),
+                             unique_words = nrow(top_words),
+                             word_per_tweet = round(sum(word_count$word_count) / length(x), digits = 2))
+  list(words = words, top_words = top_words,
+       word_count = word_count, word_freq = word_freq,
+       word_summary = word_summary)
+}
+
