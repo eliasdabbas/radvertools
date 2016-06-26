@@ -131,13 +131,17 @@ kw_negative_exact <- function(x){
 #' keywords <- c("chocolate stores", "buy chocolate online", "best chocolate")
 #' kw_modified_broad(keywords)
 #' @family keyword functions
-kw_modified_broad <- function(x){
-    if (length(grep(" ", x = x)) > 0){
-    x <-  gsub(pattern = " ", replacement = " +", x = kw_broad(x))
-    x <- paste0("+", x)
+kw_modified_broad <- function(x, words = "") {
+  if(words != "") {
+    x <- tolower(x)
+    words <- tolower(words)
+    replacement <- paste0("+", words)
+    pattern <- paste0("\\b", words, "\\b")
+    x <- gsub(pattern = pattern, replacement = replacement, x = x)
     x
-  } else {
-    x <- paste0("+", kw_broad(x))
+  }else {
+    x <- gsub(pattern = "\\s", replacement = " +", x = x)
+    x <- paste0("+", x)
     x
   }
 }
