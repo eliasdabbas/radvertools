@@ -2,7 +2,6 @@ Package: advertools
 Title: Productivity & analysis tools for online marketing
 Version: 0.0.0.9000
 Authors@R: person("Elias", "Dabbas", email = "elias@media-supermarket.com", role = c("aut", "cre"))
-Maintainer: "Elias Dabbas <elias@media-supermarket.com>"
 Description: Tools that make the life of online marketers a little easier by
     providing a set of functions that help in keyword generation, keyword and text
     analysis, tracking competition, and more.
