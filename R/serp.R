@@ -1,0 +1,29 @@
+serp_google <- function(query, cse_id, api_key, lang = "en",
+                        user_loc = "us", goog_domain = "com") {
+  query <- gsub(" ", "+", query)
+  base_url <- "https://www.googleapis.com/customsearch/v1?"
+  request_url <-  paste0(base_url, "key=", api_key, "&cx=", cse_id,
+                         "&hl=", lang, "&gl=", user_loc, "&googlehost=", goog_domain,
+                         "&q=", query)
+  results <- httr::content(httr::GET(request_url))
+  query <- gsub("\\+", " ", query)
+  serp_completeDF <- data.frame()
+  for(i in seq_along(results$items)) {
+    serpDF <- data.frame(
+      query = query,
+      title = results$items[[i]]$title,
+      snippet = results$items[[i]]$snippet,
+      disp_link = results$items[[i]]$displayLink,
+      dest_link = results$items[[i]]$link
+    )
+    serp_completeDF <- rbind(serp_completeDF, serpDF)
+  }
+  serp_completeDF$time <- Sys.time()
+  serp_completeDF$rank <- 1:nrow(serp_completeDF)
+  serp_completeDF$domain <- goog_domain
+  serp_completeDF$lang <- lang
+  serp_completeDF$loc <- user_loc
+  serp_completeDF$disp_link <- gsub("^www\\.", "", serp_completeDF$disp_link)
+  serp_completeDF
+}
+
