@@ -8,9 +8,7 @@
 #' @param lang a two-letter representation of the user langugae
 #' @param user_loc location of the user given with the two-letter ISO code
 #' @param goog_domain the domain of Google which you want it to search in
-#'
-#' Simply enter a keyword, with optional parameters, and get the page of search
-#' results returned as a data.frame.
+#' Simply enter a keyword, with optional parameters, and get the page of search results returned as a data.frame.
 serp_google <- function(query, cse_id, api_key, lang = "en",
                         user_loc = "us", goog_domain = "com") {
   query <- gsub(" ", "+", query)

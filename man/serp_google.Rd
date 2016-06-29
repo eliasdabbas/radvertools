@@ -19,9 +19,7 @@ serp_google(query, cse_id, api_key, lang = "en", user_loc = "us",
 \item{user_loc}{location of the user given with the two-letter ISO code}
 
 \item{goog_domain}{the domain of Google which you want it to search in
-
-Simply enter a keyword, with optional parameters, and get the page of search
-results returned as a data.frame.}
+Simply enter a keyword, with optional parameters, and get the page of search results returned as a data.frame.}
 }
 \description{
 Search engine results page.
