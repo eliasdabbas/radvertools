@@ -4,7 +4,7 @@
 \alias{kw_modified_broad}
 \title{Modified broad match keywords}
 \usage{
-kw_modified_broad(x)
+kw_modified_broad(x, words = "")
 }
 \arguments{
 \item{x}{a keyword or a vector of keywords}
