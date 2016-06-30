@@ -28,8 +28,6 @@ search_ads_google <- function(keywords, domains = "com"){
   pagedf <- expand.grid(keywords, domains)
   names(pagedf) <- c("keywords", "domains")
   pagedf$page <- paste0("https://google.",pagedf$domains, "/search?q=", pagedf$keywords)
-
-  # Get ads and bind in one data frame -------------------------------------------
   google_adsDF <- data.frame(keyword = character(),headlines = character(),
                              adtext = character(), dispurl = character(),
                              domain = character())
@@ -52,7 +50,6 @@ search_ads_google <- function(keywords, domains = "com"){
       google_adsDF <- rbind(google_adsDF, df)
     }
   }
-  # Add new columns to data frame + clean keywords--------------------------------
 
   google_adsDF$keyword <- gsub("\\+", " ", x = google_adsDF$keyword)
   google_adsDF$rank <- 1:nrow(google_adsDF)
