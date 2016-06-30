@@ -2,7 +2,7 @@
 % Please edit documentation in R/twitter.R
 \name{twtr_get_hashtags}
 \alias{twtr_get_hashtags}
-\title{twtr_get_hashtags}
+\title{Extract and analyze hashtags from tweets}
 \usage{
 twtr_get_hashtags(x)
 }
@@ -11,8 +11,28 @@ twtr_get_hashtags(x)
 }
 \value{
 a list of data frames about the hash tags
+\enumerate{
+  \item \code{hashtags}: a matrix of all hashtags used, each row corresponding to a
+  tweet.
+  \item \code{top_hashtags}: a data.frame of the top hashtags, showing the frequency
+  of usage, and sorted in descending order.
+  \item \code{hash_count}: a data.frame with one column, where each row shows the
+  number of hashtags used in the corresponding tweet.
+  \item \code{hash_freq}: a data.frame showing the number of tweets where one hashtag
+  was used, where two hashtags were used, etc
+  \item \code{hashtag_summary}: a summary data.frame shwoing the number of tweets,
+  total hashtag count, unique hashtags, and hashtags per tweet
+}
 }
 \description{
-Extract hash tags and analyze them
+Get the hashtags from a vector of tweets, together with summaries about the
+usage of those hashtags; frequency, occurrences, percentages, and more
+}
+\examples{
+
+tweets <- c("this is my first #tweet with #two hashtags and one @mention",
+"my second tweet has no hashtags and no mentions",
+"my third #tweet #has #the most hashtags and @mentions @mention")
+twtr_get_hashtags(tweets)
 }
 
