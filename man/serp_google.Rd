@@ -2,7 +2,7 @@
 % Please edit documentation in R/serp.R
 \name{serp_google}
 \alias{serp_google}
-\title{serp_google}
+\title{Get the search engine results pages.}
 \usage{
 serp_google(query, cse_id, api_key, lang = "en", user_loc = "us",
   goog_domain = "com")
@@ -19,9 +19,32 @@ serp_google(query, cse_id, api_key, lang = "en", user_loc = "us",
 \item{user_loc}{location of the user given with the two-letter ISO code}
 
 \item{goog_domain}{the domain of Google which you want it to search in
-Simply enter a keyword, with optional parameters, and get the page of search results returned as a data.frame.}
+Simply enter a keyword, with optional parameters, and get the page of search
+results returned as a data.frame.}
+}
+\value{
+A data.frame of the ten search results, as they are ranked,
+together with the supplied parameters; query, language, location, Google domain,
+and the time the query was run. Each of those parameters has its own column to
+aid later in any analysis you want to make.
 }
 \description{
-Search engine results page.
+Get the top ten resuls of any query you want, along with several
+paramters of the search query; the location of the user, language,
+and the Google domain where you want the query to be run.
+}
+\details{
+You will need to create an account at
+\href{https://console.developers.google.com/}{Google's Developers Console}.
+You also need to create a \href{https://cse.google.com/}{custom search engine}.
+Then you will need to supply you API key from the developer console, as well
+as your custom search engine ID (referred to as "cx" by Google).
+}
+\examples{
+
+\dontrun{
+serp_google("credit card", cse_id = "YOUR_CUSTOM_SEARCH_ENGINE_ID",
+api_key = "YOUR_API_KEY", lang = "en", user_loc = "jp", goog_domain = "co.jp")
+}
 }
 
