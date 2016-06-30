@@ -13,15 +13,17 @@ vignette: >
 
 The second family of functions help you get an overview of who's bidding on which keywords for a search engine / domain combination. 
 
-```{r message=FALSE, warning=FALSE}
+```{r message=FALSE, warning=FALSE, eval=FALSE}
 library(advertools)
 library(dplyr)
 library(tidyr)
-search_ads_google(keywords = c("flight reservations", "hotel #booking"), domains = c("com", "co.uk"))
-
-head(google_adsDF)
-
+search_ads_google(keywords = c("flight reservations", "hotel booking"), domains = c("com", "co.uk"))
 ```
+```{r }
+library(advertools)
+head(sample_search_ads, 10)
+```
+
 We can observer several things here: 
 
 #### Analysis by keyword
