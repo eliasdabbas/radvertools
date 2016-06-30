@@ -5,12 +5,12 @@
 \alias{boxoffice}
 \title{Boxoffice revenues of 14,196 US movies}
 \format{A data.frame with 14,196 observations and 5 variables
-\describe{
-  \item{rank}{ranking, based on alltime revenue}
-  \item{title}{the name of the movie}
-  \item{studio}{the production studio}
-  \item{lifetime_gross}{lifetime boxoffice revenue}
-  \item{year}{year of production}
+\enumerate{
+  \item{rank}: {ranking, based on alltime revenue}
+  \item{title}: {the name of the movie}
+  \item{studio}: {the production studio}
+  \item{lifetime_gross}: {lifetime boxoffice revenue}
+  \item{year}: {year of production}
 }}
 \source{
 \href{http://www.boxofficemojo.com/alltime/domestic.htm}{Boxoffice Mojo}
