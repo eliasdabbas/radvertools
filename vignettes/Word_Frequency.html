@@ -7,11 +7,12 @@
 <meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <meta name="author" content="Elias Dabbas" />
 
-<meta name="date" content="2016-05-01" />
+<meta name="date" content="2016-06-30" />
 
 <title>Word Frequency</title>
 
@@ -57,6 +58,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </style>
 
 
+
 <link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
 
 </head>
@@ -65,14 +67,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 
-<div class="fluid-row" id="header">
 
-
-<h1 class="title">Word Frequency</h1>
+<h1 class="title toc-ignore">Word Frequency</h1>
 <h4 class="author"><em>Elias Dabbas</em></h4>
-<h4 class="date"><em>2016-05-01</em></h4>
+<h4 class="date"><em>2016-06-30</em></h4>
 
-</div>
 
 
 <div id="a-function-to-extract-hidden-insights-from-a-long-tail-of-unstructured-text" class="section level3">
@@ -96,7 +95,7 @@ df</code></pre></div>
 ## 3  third word      1</code></pre>
 <p>Metric here was set to 1 because we are not taking any weights, and simply counting the occurence of each word.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyr)
-df &lt;-<span class="st"> </span>df %&gt;%<span class="st"> </span><span class="kw">separate</span>(<span class="dt">col =</span> text, <span class="dt">into =</span> <span class="dv">1</span>:<span class="dv">2</span>, <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>, <span class="dt">remove =</span> F)
+df &lt;-<span class="st"> </span>df %&gt;%<span class="st"> </span><span class="kw">separate</span>(<span class="dt">col =</span> text, <span class="dt">into =</span> <span class="kw">as.character</span>(<span class="dv">1</span>:<span class="dv">2</span>), <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>, <span class="dt">remove =</span> F)
 df</code></pre></div>
 <pre><code>##          text      1    2 metric
 ## 1  first word  first word      1
@@ -140,7 +139,7 @@ df2</code></pre></div>
 ## 3 great title    300
 ## 4  great name    150</code></pre>
 <p>running the same previous code in one chunk:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df2 &lt;-<span class="st"> </span>df2 %&gt;%<span class="st"> </span><span class="kw">separate</span>(<span class="dt">col =</span> text, <span class="dt">into =</span> <span class="dv">1</span>:<span class="dv">2</span>, <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>, <span class="dt">remove =</span> F) %&gt;%<span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df2 &lt;-<span class="st"> </span>df2 %&gt;%<span class="st"> </span><span class="kw">separate</span>(<span class="dt">col =</span> text, <span class="dt">into =</span> <span class="kw">as.character</span>(<span class="dv">1</span>:<span class="dv">2</span>), <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>, <span class="dt">remove =</span> F) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">gather</span>(order, word, -<span class="kw">c</span>(text, metric)) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">group_by</span>(word) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">metric =</span> <span class="kw">sum</span>(metric, <span class="dt">na.rm =</span> T)) %&gt;%<span class="st"> </span>
@@ -160,50 +159,50 @@ df2</code></pre></div>
 <table>
 <thead>
 <tr class="header">
-<th align="left">text</th>
-<th align="left">metric</th>
+<th>text</th>
+<th>metric</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Star Wars The Force Awakens</td>
-<td align="left">935254389</td>
+<td>Star Wars The Force Awakens</td>
+<td>935254389</td>
 </tr>
 <tr class="even">
-<td align="left">Avatar</td>
-<td align="left">760507625</td>
+<td>Avatar</td>
+<td>760507625</td>
 </tr>
 <tr class="odd">
-<td align="left">Titanic</td>
-<td align="left">658672302</td>
+<td>Titanic</td>
+<td>658672302</td>
 </tr>
 <tr class="even">
-<td align="left">Jurassic World</td>
-<td align="left">652270625</td>
+<td>Jurassic World</td>
+<td>652270625</td>
 </tr>
 <tr class="odd">
-<td align="left">Marvels The Avengers</td>
-<td align="left">623357910</td>
+<td>Marvels The Avengers</td>
+<td>623357910</td>
 </tr>
 <tr class="even">
-<td align="left">The Dark Knight</td>
-<td align="left">534858444</td>
+<td>The Dark Knight</td>
+<td>534858444</td>
 </tr>
 <tr class="odd">
-<td align="left">Star Wars Episode I - The Phantom Menace</td>
-<td align="left">474544677</td>
+<td>Star Wars Episode I - The Phantom Menace</td>
+<td>474544677</td>
 </tr>
 <tr class="even">
-<td align="left">Star Wars</td>
-<td align="left">460998007</td>
+<td>Star Wars</td>
+<td>460998007</td>
 </tr>
 <tr class="odd">
-<td align="left">Avengers Age of Ultron</td>
-<td align="left">459005868</td>
+<td>Avengers Age of Ultron</td>
+<td>459005868</td>
 </tr>
 <tr class="even">
-<td align="left">The Dark Knight Rises</td>
-<td align="left">448139099</td>
+<td>The Dark Knight Rises</td>
+<td>448139099</td>
 </tr>
 </tbody>
 </table>
@@ -225,9 +224,11 @@ movies</code></pre></div>
 ## 9                    Avengers Age of Ultron 459005868
 ## 10                    The Dark Knight Rises 448139099</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(advertools)
-<span class="kw">word_frequency</span>(movies)
-<span class="kw">data.frame</span>(textdf)</code></pre></div>
-<pre><code>##        word abs_freq   wtd_freq cum_perc  perc
+<span class="kw">word_frequency</span>(movies)</code></pre></div>
+<pre><code>## Source: local data frame [22 x 7]
+## 
+##        word abs_freq   wtd_freq cum_perc  perc
+##       &lt;chr&gt;    &lt;int&gt;      &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;
 ## 1       the        5 3016154519     0.16 0.157
 ## 2      star        3 1870797073     0.25 0.097
 ## 3      wars        3 1870797073     0.35 0.097
@@ -238,41 +239,8 @@ movies</code></pre></div>
 ## 8     force        1  935254389     0.61 0.049
 ## 9    avatar        1  760507625     0.65 0.040
 ## 10  titanic        1  658672302     0.68 0.034
-## 11 jurassic        1  652270625     0.72 0.034
-## 12    world        1  652270625     0.75 0.034
-## 13  marvels        1  623357910     0.78 0.032
-## 14        -        1  474544677     0.81 0.025
-## 15  episode        1  474544677     0.83 0.025
-## 16        i        1  474544677     0.86 0.025
-## 17   menace        1  474544677     0.88 0.025
-## 18  phantom        1  474544677     0.91 0.025
-## 19      age        1  459005868     0.93 0.024
-## 20       of        1  459005868     0.95 0.024
-## 21   ultron        1  459005868     0.98 0.024
-## 22    rises        1  448139099     1.00 0.023
-##                                        text original_metric
-## 1               Star Wars The Force Awakens       935254389
-## 2                                    Avatar       760507625
-## 3                                   Titanic       658672302
-## 4                            Jurassic World       652270625
-## 5                      Marvels The Avengers       623357910
-## 6                           The Dark Knight       534858444
-## 7  Star Wars Episode I - The Phantom Menace       474544677
-## 8                                 Star Wars       460998007
-## 9                    Avengers Age of Ultron       459005868
-## 10                    The Dark Knight Rises       448139099
-## 11                                     &lt;NA&gt;              NA
-## 12                                     &lt;NA&gt;              NA
-## 13                                     &lt;NA&gt;              NA
-## 14                                     &lt;NA&gt;              NA
-## 15                                     &lt;NA&gt;              NA
-## 16                                     &lt;NA&gt;              NA
-## 17                                     &lt;NA&gt;              NA
-## 18                                     &lt;NA&gt;              NA
-## 19                                     &lt;NA&gt;              NA
-## 20                                     &lt;NA&gt;              NA
-## 21                                     &lt;NA&gt;              NA
-## 22                                     &lt;NA&gt;              NA</code></pre>
+## ..      ...      ...        ...      ...   ...
+## Variables not shown: text &lt;fctr&gt;, original_metric &lt;dbl&gt;.</code></pre>
 </div>
 </div>
 <div id="word" class="section level3">
