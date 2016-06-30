@@ -33,7 +33,7 @@ Metric here was set to 1 because we are not taking any weights, and simply count
 
 ```{r}
 library(tidyr)
-df <- df %>% separate(col = text, into = 1:2, sep = " ", remove = F)
+df <- df %>% separate(col = text, into = as.character(1:2), sep = " ", remove = F)
 df
 
 ```
@@ -65,7 +65,7 @@ df2
 ```
 running the same previous code in one chunk: 
 ```{r}
-df2 <- df2 %>% separate(col = text, into = 1:2, sep = " ", remove = F) %>% 
+df2 <- df2 %>% separate(col = text, into = as.character(1:2), sep = " ", remove = F) %>% 
   gather(order, word, -c(text, metric)) %>% 
   group_by(word) %>% 
   summarise(metric = sum(metric, na.rm = T)) %>% 
@@ -104,7 +104,7 @@ movies <- data.frame(
 movies
 library(advertools)
 word_frequency(movies)
-data.frame(textdf)
+
 
 ```
 
