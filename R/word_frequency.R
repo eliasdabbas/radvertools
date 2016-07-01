@@ -12,6 +12,9 @@
 #' - any other social media text with metrics
 #'
 #' @param df a data frame with a character and a numeric vector columns
+#' @param sep the separator of words, defaults to space, but can be modified if needed
+#' @param rm_words words to remove, defaults to English stopwords from the \code{tm}
+#' package
 #'
 #' @return a data frame of metrics by word along side the original metrics
 #' @export
