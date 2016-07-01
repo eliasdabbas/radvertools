@@ -12,8 +12,8 @@
 #' times a day, and bind the data in one large data frame. This can augment your campaign
 #' data in interesting ways and can give you additional insights.
 #'
-#' @param keywords: a keyword or a character vector
-#' @param domains: the Google domain you wish to check
+#' @param keywords a keyword or a character vector
+#' @param domains the Google domain you wish to check
 #'
 #' @return data frame with ad text with some metadata
 #' @export
