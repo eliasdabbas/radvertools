@@ -10,10 +10,6 @@ Depends:
     dplyr (>= 0.4.3),
     tidyr (>= 0.5.1),
     stringr (>= 1.0.0)
-Imports:
-    dplyr,
-    tidyr,
-    stringr
 License: MIT
 LazyData: true
 RoxygenNote: 5.0.1

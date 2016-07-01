@@ -28,6 +28,10 @@
 #'
 #' @source \href{http://www.ranks.nl/stopwords/arabic}{Ranks.nl}
 "stopwords_ar"
-
-
+#' A sample result of search ads
+#'
+#' A few ads retrieved through the search_ads_google() function, to illustrate
+#' how it looks like and for demonstration purposes.
+#'
+"sample_search_ads"
 
