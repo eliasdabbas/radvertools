@@ -9,7 +9,6 @@
 #'
 #' @return keywords without ", [, ], +, or -
 #' @export
-#' @importFrom magrittr %>%
 #' @keywords AdWords, Bing Ads, SEM, online marketing
 #' @examples
 #' iris$exact <- kw_exact(iris$Species)
@@ -123,7 +122,7 @@ kw_negative_exact <- function(x){
 #' next to them.
 #'
 #' @param x a keyword or a vector of keywords
-#'
+#' @param words add words if you want to have a + sign only next to them
 #' @return modified broad match keywords
 #' @export
 #'
