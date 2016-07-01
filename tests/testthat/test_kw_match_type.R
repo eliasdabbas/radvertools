@@ -16,9 +16,14 @@ test_that("kw_broad removes punctuation", {
   expect_equal(kw_broad("keyword][]"), "keyword")
 })
 
-test_that("ke_modified_broad adds + before all words", {
+test_that("kw_modified_broad adds + before all words", {
   expect_equal(kw_modified_broad("keyword one"), "+keyword +one")
   expect_equal(kw_modified_broad("keyword"), "+keyword")
+})
+
+test_that("kw_modified_broad adds the + in the right place", {
+  expect_equal(kw_modified_broad("this is a word", "word"), "this is a +word")
+  expect_equal(kw_modified_broad("this is a Word", "WorD"), "this is a +word")
 })
 
 test_that("kw_negative adds a - before a keyword", {
