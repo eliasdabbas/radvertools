@@ -3,7 +3,7 @@
 #' Get the hashtags from a vector of tweets, together with summaries about the
 #' usage of those hashtags; frequency, occurrences, percentages, and more
 #'
-#' @param \code{x} a vector of tweets
+#' @param x a vector of tweets
 #'
 #' @export
 #'
@@ -47,7 +47,7 @@ twtr_get_hashtags <- function(x) {
 #' Get the mentions from a vector of tweets, together with summaries about the
 #' usage of those mentions; frequency, occurrences, percentages, and more
 #'
-#' @param \code{x} a vector of tweets
+#' @param x a vector of tweets
 #'
 #' @export
 #'
@@ -91,9 +91,9 @@ twtr_get_mentions <- function(x) {
 #' Get a word from a vector of tweets, together with summaries about the
 #' usage of this word; frequency, occurrences, percentages, and more
 #'
-#' @param \code{x} a vector of tweets
-#' @param \code{words} a character vector of one or more words
-#' @param \code{exact} logical, defaults to TRUE, do you want the \code{words}
+#' @param x a vector of tweets
+#' @param words a character vector of one or more words
+#' @param exact logical, defaults to TRUE, do you want the \code{words}
 #' to be exactly matched as complete words or do you want anny occurence of
 #' this sequence of characters?
 #'
