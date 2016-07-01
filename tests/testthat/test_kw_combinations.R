@@ -16,3 +16,7 @@ test_that("kw_combinations adds a new column", {
 test_that("kw_combinations produces the right output", {
   expect_equal(kw_df_combo[1,1], "word this")
 })
+
+test_that("error is given on selecting non-existing columns", {
+  expect_error(kw_combinations(kw_df, cols = c("col1", "col2")))
+})
