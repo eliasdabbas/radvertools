@@ -18,7 +18,7 @@
 #'
 #' @examples
 #' word_frequency(boxoffice)
-word_frequency <- function(df, sep = " "){
+word_frequency <- function(df, sep = " ", rm_words = stopwords_en){
 
   names(df) <- c("text", "metric")
   df$metric <- tidyr::extract_numeric(df$metric)
@@ -32,6 +32,7 @@ word_frequency <- function(df, sep = " "){
   df <- df %>% tidyr::gather(order, word, -c(text, length, metric))
   df <- df %>% dplyr::filter(!is.na(word))
   df$word <- tolower(df$word)
+  df <- df %>% dplyr::filter(!word %in% rm_words)
   df <- df %>% dplyr::group_by(word) %>%
     dplyr::summarise(abs_freq = n(),   wtd_freq = sum(metric, na.rm = TRUE)) %>%
     dplyr::arrange(desc(wtd_freq))
