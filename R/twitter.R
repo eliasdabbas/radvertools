@@ -27,12 +27,12 @@
 #' "my third #tweet #has #the most hashtags and @mentions @mention")
 #' twtr_get_hashtags(tweets)
 twtr_get_hashtags <- function(x) {
-  hashtags        <- tolower(stringr::str_extract_all(x, "(^#\\w+| #\\w+)", TRUE))
+  hashtags        <- tolower(stringr::str_extract_all(x, "#\\S+", TRUE))
   colnames(hashtags) <- paste0("hash_", 1:ncol(hashtags))
   top_hashtags   <- as.data.frame(sort(table(hashtags), decreasing = TRUE),
                                   stringsAsFactors = F)
   top_hashtags   <- subset(top_hashtags, hashtags != "")
-  hash_count      <- data.frame(hash_count = stringr::str_count(x, "(^#\\w+| #\\w+)"))
+  hash_count      <- data.frame(hash_count = stringr::str_count(x, "#\\S+"))
   hash_freq      <- as.data.frame(table(hash_count))
   hashtag_summary <- data.frame(tweets = length(x),
                                 hashtag_count = sum(hash_count$hash_count),
@@ -92,9 +92,10 @@ twtr_get_mentions <- function(x) {
 #' usage of this word; frequency, occurrences, percentages, and more
 #'
 #' @param \code{x} a vector of tweets
-#' @param \code{word} the word you want to extract
-#' @param \code{exact} logical, do you want the \code{word} to be exactly matched
-#' or do you want anny occurence of this sequence of characters?
+#' @param \code{words} a character vector of one or more words
+#' @param \code{exact} logical, defaults to TRUE, do you want the \code{words}
+#' to be exactly matched as complete words or do you want anny occurence of
+#' this sequence of characters?
 #'
 #' @export
 #'
@@ -102,6 +103,7 @@ twtr_get_mentions <- function(x) {
 #' \enumerate{
 #'   \item \code{words}: a matrix of occurences of the word, each row corresponding to a
 #'   tweet.
+#'   \item \code{top_words} a data frame of the most frequently used words, sorted
 #'   \item \code{word_count}: a data.frame with one column, where each row shows the
 #'   number of times the word was used in the corresponding tweet.
 #'   \item \code{word_freq}: a data.frame showing the number of tweets where the word
@@ -115,22 +117,27 @@ twtr_get_mentions <- function(x) {
 #' "my second tweet has no hashtags and no mentions",
 #' "my third #tweet #has #the most hashtags and @mentions @mention")
 #' twtr_get_word(tweets, word = "hashtags", exact = TRUE)
-twtr_get_word <- function(x, word = "word", exact = TRUE) {
+twtr_get_words <- function(x, words, exact = TRUE) {
   x <- tolower(x)
-  word <- tolower(word)
+  words <- tolower(words)
 
   if (exact) {
-    wordregex <- paste0("(^", word, " | ", word, " | ", word, "$)")
+    wordregex <- paste0("\\b", paste0(words, collapse = "\\b|\\b"), "\\b")
   }else {
-    wordregex <- word
+    wordregex <- paste0(words, collapse = "|")
   }
   words        <- stringr::str_extract_all(x, wordregex, TRUE)
   colnames(words) <- paste0("word_", 1:ncol(words))
+  top_words   <- as.data.frame(sort(table(words), decreasing = TRUE),
+                               stringsAsFactors = F)
+  top_words   <- subset(top_words, words != "")
   word_count      <- data.frame(word_count = stringr::str_count(x, wordregex))
   word_freq      <- as.data.frame(table(word_count))
   word_summary <- data.frame(tweets = length(x),
                              word_count = sum(word_count$word_count),
-                             word_per_tweet = round(sum(word_count$word_count) / length(x), digits = 2))
-  list(words = words, word_count = word_count, word_freq = word_freq,
+                             unique_words = nrow(top_words),
+                             words_per_tweet = round(sum(word_count$word_count) / length(x), digits = 2))
+  list(words = words, top_words = top_words,
+       word_count = word_count, word_freq = word_freq,
        word_summary = word_summary)
 }
