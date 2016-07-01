@@ -13,6 +13,7 @@ test_that("kw_phrase wraps parentheses",{
 test_that("kw_broad removes punctuation", {
   expect_equal(kw_broad("[-keyword]"), "keyword")
   expect_equal(kw_broad("keyword"), "keyword")
+  expect_equal(kw_broad("keyword][]"), "keyword")
 })
 
 test_that("ke_modified_broad adds + before all words", {
