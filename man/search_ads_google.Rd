@@ -7,9 +7,9 @@
 search_ads_google(keywords, domains = "com")
 }
 \arguments{
-\item{keywords:}{a keyword or a character vector}
+\item{keywords}{a keyword or a character vector}
 
-\item{domains:}{the Google domain you wish to check}
+\item{domains}{the Google domain you wish to check}
 }
 \value{
 data frame with ad text with some metadata

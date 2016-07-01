@@ -7,7 +7,7 @@
 twtr_get_hashtags(x)
 }
 \arguments{
-\item{\code{x}}{a vector of tweets}
+\item{x}{a vector of tweets}
 }
 \value{
 a list of data frames about the hash tags

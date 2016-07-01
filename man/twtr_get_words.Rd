@@ -7,11 +7,11 @@
 twtr_get_words(x, words, exact = TRUE)
 }
 \arguments{
-\item{\code{x}}{a vector of tweets}
+\item{x}{a vector of tweets}
 
-\item{\code{words}}{a character vector of one or more words}
+\item{words}{a character vector of one or more words}
 
-\item{\code{exact}}{logical, defaults to TRUE, do you want the \code{words}
+\item{exact}{logical, defaults to TRUE, do you want the \code{words}
 to be exactly matched as complete words or do you want anny occurence of
 this sequence of characters?}
 }

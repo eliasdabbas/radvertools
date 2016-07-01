@@ -8,6 +8,8 @@ kw_modified_broad(x, words = "")
 }
 \arguments{
 \item{x}{a keyword or a vector of keywords}
+
+\item{words}{add words if you want to have a + sign only next to them}
 }
 \value{
 modified broad match keywords

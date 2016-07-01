@@ -4,10 +4,15 @@
 \alias{word_frequency}
 \title{Word frequency}
 \usage{
-word_frequency(df, sep = " ")
+word_frequency(df, sep = " ", rm_words = stopwords_en)
 }
 \arguments{
 \item{df}{a data frame with a character and a numeric vector columns}
+
+\item{sep}{the separator of words, defaults to space, but can be modified if needed}
+
+\item{rm_words}{words to remove, defaults to English stopwords from the \code{tm}
+package}
 }
 \value{
 a data frame of metrics by word along side the original metrics
