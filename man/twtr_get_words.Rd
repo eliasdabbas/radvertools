@@ -38,6 +38,6 @@ usage of this word; frequency, occurrences, percentages, and more
 tweets <- c("this is my first #tweet with #two hashtags and one @mention",
 "my second tweet has no hashtags and no mentions",
 "my third #tweet #has #the most hashtags and @mentions @mention")
-twtr_get_word(tweets, word = "hashtags", exact = TRUE)
+twtr_get_words(tweets, word = "hashtags", exact = TRUE)
 }
 
