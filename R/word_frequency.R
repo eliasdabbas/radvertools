@@ -20,7 +20,7 @@
 #' @export
 #'
 #' @examples
-#' word_frequency(boxoffice)
+#' word_frequency(boxoffice[c("title", "lifetime_gross")])
 word_frequency <- function(df, sep = " ", rm_words = stopwords_en){
 
   names(df) <- c("text", "metric")
