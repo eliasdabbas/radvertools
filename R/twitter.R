@@ -141,3 +141,46 @@ twtr_get_words <- function(x, words, exact = TRUE) {
        word_count = word_count, word_freq = word_freq,
        word_summary = word_summary)
 }
+#' Extract and analyze URLs from tweets
+#'
+#' Get URLs from a vector of tweets, together with summaries about their
+#' usage; frequency, occurrences, percentages, and more
+#'
+#' @param x a vector of tweets
+#'
+#' @export
+#'
+#' @return a list of data frames about the URLs
+#' \enumerate{
+#'   \item \code{urls}: a matrix of occurences of the URLs, each row corresponding to a
+#'   tweet.
+#'   \item \code{top_urls} a data frame of the most frequently used URLs, sorted
+#'   \item \code{url_count}: a data frame with one column, where each row shows the
+#'   number of times the URL was used in the corresponding tweet.
+#'   \item \code{url_freq}: a data frame showing the number of tweets where the URL
+#'   was used once, where the URL was used twice, etc
+#'   \item \code{url_summary}: a summary data frame shwoing the number of tweets,
+#'   total URL count, unique URLs, and URLs per tweet
+#' }
+#' @examples
+#'
+#' tweets <- c("this is my first #tweet with #two hashtags and one @mention http://t.co/foo",
+#' "my second tweet has no hashtags and no mentions https://t.co/bar",
+#' "my third #tweet #has #the most hashtags and @mentions @mention http://sub.domain/something")
+#' twtr_get_urls(tweets)
+twtr_get_urls <- function(x) {
+  urls         <- tolower(stringr::str_extract_all(x, "https?:\\/\\/\\S+", TRUE))
+  colnames(urls) <- paste0("url_", 1:ncol(urls))
+  top_urls   <- as.data.frame(sort(table(urls), decreasing = TRUE),
+                              stringsAsFactors = F)
+  top_urls   <- subset(top_urls, urls != "")
+  url_count      <- data.frame(url_count = stringr::str_count(x, "https?:\\/\\/\\S+"))
+  url_freq      <- as.data.frame(table(url_count))
+  url_summary <- data.frame(tweets = length(x),
+                            url_count = sum(url_count$url_count),
+                            unique_urls = nrow(top_urls),
+                            urls_per_tweet = round(sum(url_count$url_count) / length(x), digits = 2))
+  list(urls = urls, top_urls = top_urls,
+       url_count = url_count, url_freq = url_freq,
+       url_summary = url_summary)
+}
