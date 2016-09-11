@@ -24,7 +24,7 @@
 word_frequency <- function(df, sep = " ", rm_words = stopwords_en){
 
   names(df) <- c("text", "metric")
-  df$metric <- tidyr::extract_numeric(df$metric)
+  df$metric <- as.numeric(gsub("[^0-9.-]+", "", as.character(df$metric)))
   df <- df[order(df$metric,decreasing = TRUE), ]
   originaldf <- df
   df <- df %>% dplyr::filter(!is.na(text))
