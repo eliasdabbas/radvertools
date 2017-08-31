@@ -25,7 +25,7 @@ You can install advertools from github with:
 
 ``` r
 install.packages("devtools")
-devtools::install_github("eliasdabbas/advertools")
+devtools::install_github("eliasdabbas/radvertools")
 ```
 
 word\_frequency()
